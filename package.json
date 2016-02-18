@@ -16,6 +16,9 @@
     "url": "https://github.com/dconstructing/contribute-auth/issues"
   },
   "dependencies": {
-    "express": "~4.13.4"
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "express": "~4.13.4",
+    "request": "^2.69.0"
   }
 }
