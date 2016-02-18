@@ -1,0 +1,21 @@
+{
+  "name": "contribute-auth",
+  "version": "1.0.0",
+  "description": "Auth backend to obtain auth `token` from github `code` param",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dconstructing/contribute-auth.git"
+  },
+  "author": "David Cox <losttime.shuffle@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dconstructing/contribute-auth/issues"
+  },
+  "dependencies": {
+    "express": "~4.13.4"
+  }
+}
