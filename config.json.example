@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "github": {
+      "clientId": "[github app client ID]",
+      "clientSecret": "[github app client secret]"
+    }
+  },
+  "server": {
+    "port": 3080
+  }
+}

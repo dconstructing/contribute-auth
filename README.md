@@ -8,6 +8,12 @@ Auth backend to obtain auth `token` from github `code` param
 
   `npm install`
 
-2. Run
+2. Configure
+
+  `cp config.json.example config.json`
+
+  Set your GitHub Client ID and Client Secret
+
+3. Run
 
   `npm start`
