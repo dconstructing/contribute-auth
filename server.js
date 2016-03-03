@@ -1,3 +1,4 @@
+var Backendless = require('backendless');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var express = require('express');
@@ -11,6 +12,22 @@ app.use(bodyParser.json()); // for parsing application/json
 var corsOptions = {
 	origin: true
 }
+
+Backendless.initApp(config.baas.backendless.appId, config.baas.backendless.secretKey, config.baas.backendless.version);
+
+Backendless.UserService.login('auth@dconstructing.com', 'nothing', true, new Backendless.Async(function(data) {
+	console.log('logged in', data);
+}, function(error) {
+	console.error('error logging in', error);
+}));
+
+function Repositories(args) {
+	args = args || {};
+	this.name = args.name || 'Default name';
+	this.description = args.description || 'No Description';
+	this.url = args.url;
+}
+var dataStore = Backendless.Persistence.of(Repositories);
 
 app.options('/exchange/github', cors(corsOptions)); // enable pre-flight request for POST request
 app.post('/exchange/github', cors(corsOptions), function (req, res) {
@@ -90,7 +107,16 @@ app.post('/data/repo', cors(corsOptions), function(req, res) {
 		var token = authHeader.split(' ')[1];
 		determineOwnership(token, req.body, function(isOwner) {
 			if (isOwner) {
-				console.log('should submit');
+				dataStore.save(new Repositories({
+					name: req.body.name,
+					description: req.body.description,
+					url: req.body.htmlUrl
+				}), new Backendless.Async(function(data) {
+					res.status(200).send('OK');
+				}, function(error) {
+					console.error('error', error);
+					res.status(500).send('Internal Server Error');
+				}));
 			} else {
 				res.status(403).send('Forbidden');
 			}
